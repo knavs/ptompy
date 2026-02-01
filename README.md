@@ -46,6 +46,16 @@ python build_nuitka.py
 
 Output: `build/` with `ptompy.exe`.
 
+### Setup installer (optional)
+
+To create a Windows setup.exe for distribution:
+
+1. Build the standalone (see above).
+2. Install [Inno Setup 6](https://jrsoftware.org/isdl.php).
+3. Run: `python build_setup.py`
+
+Output: `build/PtoMpy_Setup_0.2.exe` (or run `iscc setup.iss` manually).
+
 ## Requirements
 
 - Python 3.x
