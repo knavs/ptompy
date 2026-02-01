@@ -7,7 +7,7 @@ Prerequisites:
 
 Then run:  python build_setup.py
 
-Output: build\PtoMpy_Setup_0.2.exe (or similar, depending on version in setup.iss)
+Output: build/PtoMpy_Setup_0.2.exe (or similar, depending on version in setup.iss)
 """
 import os
 import subprocess

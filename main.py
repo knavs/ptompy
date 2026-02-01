@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import sys
 import subprocess
+import sys
 from pathlib import Path
 from PIL import Image, ImageTk
 from tkinter import Tk, ttk, Frame, Label, StringVar
@@ -188,7 +188,7 @@ def main():
         root_widget.mainloop()
     elif mode == "tui":
         if not ptompy.init():
-            log.error("Initialization failed")
+            print("Initialization failed")
             return
         if len(sys.argv) in (2, 3) and sys.argv[1] != "--tui":
             pfile = sys.argv[1]

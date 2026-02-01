@@ -37,9 +37,7 @@ Flow:
     .m file
 """
 
-import os
 import struct
-import sys
 from pathlib import Path
 from typing import Optional, Tuple
 from dataclasses import dataclass
