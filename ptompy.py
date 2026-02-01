@@ -1,34 +1,40 @@
 """
-ptompy - Python translation of ptom.c: convert MATLAB .p (p-code) files to .m source.
-Compatible with main.py API: init, parse.
+ptompy — convert MATLAB .p (p-code) files to .m source. Python port of ptom.c.
 
-Decoding process (minimal flowchart):
+API: init(), parse(pfile, mfile) → (code, msg). Used by main.py.
+
+Flow:
 
     .p file
         |
         v
-    +------------------+
-    | _read_pfile      |  read 32-byte header, payload
-    +--------+---------+
+    +----------------------+
+    | _read_pfile          |  32-byte header + payload
+    +--------+-------------+
              |
              v
-    +------------------+
-    | _descramble     |  XOR payload with table
-    +--------+---------+
+    +----------------------+
+    | _validate_pfile_data |
+    +--------+-------------+
              |
              v
-    +------------------+
-    | uncompress       |  raw -> decompressed bytes (stdlib zlib)
-    +--------+---------+
+    +----------------------+
+    | _uncompress_pfile     |  _descramble (XOR) → zlib → _extract_tokens_from_decompressed
+    +--------+-------------+
              |
              v
-    +------------------+
-    | _decode_bytecode_to_source | 7 token counts + name table + bytecode
-    |                  |  -> decode bytecode to .m source text
-    +--------+---------+
+    +----------------------+
+    | _decode_bytecode_     |  _parse_name_table → _decode_bytecode_tokens
+    | to_source             |
+    +--------+-------------+
              |
              v
-    .m file (written)
+    +----------------------+
+    | _write_mfile         |  format + write .m
+    +--------+-------------+
+             |
+             v
+    .m file
 """
 
 import os

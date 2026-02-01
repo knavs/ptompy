@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-import logging as log
-import subprocess
 import sys
+import subprocess
 from pathlib import Path
+from PIL import Image, ImageTk
 from tkinter import Tk, ttk, Frame, Label, StringVar
 from tkinter.filedialog import askopenfilename
-from PIL import Image, ImageTk
+
+
 import ptompy
 
 CONFIG_APP_NAME = 'ptompy tool'
@@ -80,11 +81,11 @@ class ParseGUI(object):
         # enddef
 
         # Control buttons        
-        self.select_file = ttk.Button(btn_frame, text="1. Select p-file", command=self.select_pfile, image=_btn_icon("file1"), compound="left")
+        self.select_file = ttk.Button(btn_frame, text="1. Select p-file", command=self.select_pfile, image=_btn_icon("open-pfile"), compound="left")
         self.select_file.pack(side="left")
-        self.convert_btn = ttk.Button(btn_frame, text="2. Convert!", command=self.parse_file, image=_btn_icon("wand"), compound="left")
+        self.convert_btn = ttk.Button(btn_frame, text="2. Convert!", command=self.parse_file, image=_btn_icon("convert"), compound="left")
         self.convert_btn.pack(side="left")
-        self.open_mfile_btn = ttk.Button(btn_frame, text="3. Open m-file", command=self.view_mfile, image=_btn_icon("external"), compound="left")
+        self.open_mfile_btn = ttk.Button(btn_frame, text="3. Open m-file", command=self.view_mfile, image=_btn_icon("open-mfile"), compound="left")
         self.open_mfile_btn.pack(side="left")
         self.progressbar = ttk.Progressbar(mode="indeterminate")
         self.progressbar.pack_forget()
@@ -125,7 +126,7 @@ class ParseGUI(object):
             self.progressbar.pack_forget()
             self.status.set("Please select a .p (MATLAB) file!")
             self.status_label.config(fg='red')
-            
+
         elif self.filename.get() != 'No file selected' and self.pfile.suffix == '.p':
             self.status.set("Decoding... (most files decode in a few seconds)")
             code, msg = ptompy.parse(self.pfile, self.mfile)
@@ -141,10 +142,6 @@ class ParseGUI(object):
             self.status_label.config(fg='red')
         # endif
         self._fit_window_height()
-
-log.basicConfig(level=log.DEBUG)
-pil_logger = log.getLogger('PIL')
-pil_logger.setLevel(log.INFO)
 
 
 def _logo_from_ico(ico_name, size=(64, 64)):
@@ -176,13 +173,13 @@ def main():
     if mode == "gui":
         _set_windows_taskbar_icon()  # So taskbar shows app icon, not Python, when run as python main.py
         root_widget = Tk()
-        win_icon = _icon_path("MATLABConnector")
+        win_icon = _icon_path("app")
         
         root_widget.iconbitmap(win_icon)
         
         ParseGUI(root_widget)
         # Use same icon as window for panel logo so they match (octave-logo scales well)
-        img_logo = _logo_from_ico(_icon_path("p"))
+        img_logo = _logo_from_ico(_icon_path("logo"))
         root_widget._panel_logo = img_logo  # keep reference
         Label(root_widget, image=img_logo).place(x=45, y=0)
         root_widget.wm_title(CONFIG_APP_NAME)

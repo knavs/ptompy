@@ -11,6 +11,9 @@ Options:
 For Python 3.13+ without --mingw64: the script tries to find Visual Studio via
 vswhere and run the build in that environment. Otherwise install "Build Tools
 for Visual Studio" with "Desktop development with C++".
+
+
+100% cursor generated
 """
 import os
 import subprocess
