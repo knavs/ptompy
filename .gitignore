@@ -1,0 +1,47 @@
+# Build & Nuitka
+build/
+*.dist/
+*.onefile-build/
+nuitka-crash-report.xml
+.nuitka/
+
+# IDE & editor
+.cursor/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+*.egg
+*.egg-info/
+.eggs/
+dist/
+*.manifest
+
+# Virtual envs
+.venv/
+.venv312/
+venv/
+env/
+.env/
+
+# Logs & debug
+*.log
+.cursor/debug.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Optional generated / local (uncomment if needed)
+# _token_table_out.txt
+# *.pyc
